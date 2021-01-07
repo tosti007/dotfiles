@@ -18,6 +18,7 @@ $ ./install.sh
 ## Directory structure
 This repo consists of 4 directories:
 
+ - **archive** additional archived files, such as the `notebook` command that I don't tend to use anymore, but might in the future.
  - **assets** additional files, such as the `ask` command and wallpapers.
  - **bin** contains some command line scripts that I tend to use often.
  - **packages** contains `*.pkgs` files that list packages installed with yay.
