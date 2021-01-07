@@ -1,0 +1,3 @@
+[submodule "user/firefox/.mozilla/firefox/startpage"]
+	path = user/firefox/.mozilla/firefox/startpage
+	url = git@github.com:tosti007/startpage.git

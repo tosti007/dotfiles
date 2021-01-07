@@ -1,0 +1,90 @@
+configuration {
+    theme: "base";
+    combi-modi: "window,drun,run";
+    show-icons: true;
+    font: "Hack 11";
+    run-command: "fish -c '{cmd}'";
+    window-thumbnail: true;
+}
+
+@import "colors.rasi"
+
+* {
+    border: 0;
+    border-color: @background;
+    border-radius: 6;
+    background-color: transparent;
+    text-color: @color15;
+}
+
+window {
+    height: 100%;
+}
+
+mainbox {
+    border: 16;
+    padding: 23px; // inner / 2 + outer
+    background-color: @color0;
+    children: [mode-switcher,inputbar,listview];
+}
+
+button {
+    padding: 4px;
+}
+
+button, inputbar, entry, case-indicator {
+    spacing: 0;
+}
+
+button.selected {
+    background-color: @background;
+    text-color:       @foreground;
+}
+
+inputbar {
+    padding: 8px; // outer
+    background-color: @background;
+    children: [prompt,textbox-prompt-colon,entry,case-indicator];
+}
+
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+}
+
+entry {
+    text-color: @foreground;
+}
+
+listview {
+    padding: 15px; // inner / 2
+    spacing: 8px; // outer
+    cycle: false;
+    dynamic: false;
+    layout: vertical;
+    background-color: transparent;
+    fixed-columns: true;
+    fixed-lines: true;
+}
+
+element {
+    margin: 15px; // inner / 2
+    padding: 15px; // inner / 2
+    orientation: vertical;
+}
+
+element-icon {
+    size: 86px;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+element.selected {
+    background-color: @background;
+    text-color:       @foreground;
+}
+

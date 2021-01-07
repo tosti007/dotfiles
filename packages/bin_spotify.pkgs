@@ -1,0 +1,4 @@
+# Packages required to run the ../bin/spotify script
+# also uses: dbus-send
+spotify-tui-bin
+spotifyd

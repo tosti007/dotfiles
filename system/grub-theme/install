@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "$0")"
+
+git clone https://github.com/vinceliuice/grub2-themes.git
+
+cd ./grub2-themes
+sudo ./install.sh --boot --slaze --white
+cd .. 
+
+rm -rf grub2-themes
+
+sudo cp ../../assets/background/background.jpg /boot/grub/themes/Slaze/
+

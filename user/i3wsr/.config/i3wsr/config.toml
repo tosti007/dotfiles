@@ -1,0 +1,20 @@
+[general]
+# We use a thin space as seperator
+separator = "\u2009"
+default_icon = ""
+
+[options]
+remove_duplicates = true
+use_instance = true
+no_names = true
+
+[icons]
+# Quick access: https://www.nerdfonts.com/cheat-sheet
+discord = "ﭮ"
+firefox = ""
+urxvt = ""
+keepassxc = ""
+vscodium = ""
+
+[aliases]
+"gimp-2.10" = "gimp"

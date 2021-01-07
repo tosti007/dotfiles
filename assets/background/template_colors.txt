@@ -1,0 +1,12 @@
+.order$nr .frame {
+  fill: $frame;
+}
+.order$nr .slide {
+  fill: $slide;
+}
+.order$nr .indent {
+  fill: $indent;
+}
+.order$nr .bar {
+  fill: $bar;
+}

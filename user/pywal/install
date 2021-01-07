@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "$0")"
+
+rm -rf "$HOME/.cache/wal/*"
+
+theme='colors.json'
+
+alpha=`sed -En '/alpha/ { s/.*"([0-9]+)".*/\1/; p; }' "$theme"`
+
+wal -f "$theme" -a "$alpha" -o hooks.sh
+
+background="$HOME/.dotfiles/assets/background"
+python "$background/generate.py"
+feh --bg-center "$background/background.jpg"
+

@@ -1,0 +1,34 @@
+{
+    "wallpaper": "$HOME/.dotfiles/assets/background/background.jpg",
+    "alpha": "90",
+    "special": {
+        "background": "#191919",
+        "foreground": "#eeeeee",
+        "cursor": "#eeeeee"
+    },
+    "colors": {
+        "color0": "#141414",
+        "color8": "#1e1e1e",
+        
+        "color1": "#ff5252",
+        "color9": "#ff5252",
+        
+        "color2": "#6ab067",
+        "color10": "#6ab067",
+        
+        "color3": "#ecd85a",
+        "color11": "#ecd85a",
+        
+        "color4": "#0f6999",
+        "color12": "#0f6999",
+        
+        "color5": "#886fb1",
+        "color13": "#886fb1",
+        
+        "color6": "#4ab6b6",
+        "color14": "#4ab6b6",
+        
+        "color7": "#aaaaaa",
+        "color15": "#aaaaaa"
+    }
+}

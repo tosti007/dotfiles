@@ -1,0 +1,3 @@
+# Packages required to run the ../bin/screenshot script
+imagemagick
+xdotool

@@ -1,0 +1,26 @@
+[general]
+	use-pywal = false
+[screen]
+	background-color = 000000ff
+	background-image = 
+[box]
+	background-color = 000000bb
+	border-radius = 6
+	margin = 30
+	padding = 30
+[ring]
+	width = 16
+	color = 0000ffff
+	color-highlight = 00ff00ff
+	color-wrong = ff0000ff
+	color-remove = ff0000ff
+[text]
+	font = sans-serif
+	color = ffffffff
+	spacing = 6
+[time]
+        width = 4
+	size = 60
+[date]
+        width = 13
+	size = 30

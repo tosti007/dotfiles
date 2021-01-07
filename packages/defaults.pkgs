@@ -1,0 +1,16 @@
+# Just some tools assumed to be installed already
+# but for the sake of completeness I will add them here too
+bash
+curl
+grep
+htop
+less
+openssh
+pacman
+sed
+stow
+sudo
+tree
+wget
+which
+yay

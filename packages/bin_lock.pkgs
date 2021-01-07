@@ -1,0 +1,3 @@
+# Packages required to run the ../bin/lock script
+i3lock-color
+imagemagick

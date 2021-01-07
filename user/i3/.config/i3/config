@@ -1,0 +1,219 @@
+# i3 config file (v4)
+# See https://i3wm.org/docs/userguide.html for complete reference
+
+######################################
+# TODO settings
+######################################
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+#######################################
+# General settings
+#######################################
+
+font pango:InputSans Nerd Font:style=Regular 8
+
+set $mod Mod4
+set $move_scratchpad move scratchpad, scratchpad show
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# borders and gaps
+default_border pixel 16
+gaps outer 8
+gaps inner 30
+gaps top 32 # outer + polybar = 8 + 24
+
+#######################################
+# Auto-startup and execute settings
+#######################################
+# reload colors in case anything changed.
+exec_always --no-startup-id ~/.dotfiles/user/pywal/restore
+
+# Lock on startup, as we aren't using the greeter.
+exec --no-startup-id i3lock-script
+exec keepassxc
+exec_always --no-startup-id ~/.fehbg
+
+exec_always --no-startup-id pkill picom; picom -b
+exec_always --no-startup-id ~/.config/dunst/launch.sh
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/i3wsr/launch.sh
+
+for_window [title="^spotify"] $move_scratchpad
+for_window [class="KeePassXC"] $move_scratchpad
+for_window [class="feh"] floating enable
+
+#######################################
+# Hotkey settings
+# Keysyms can be found with xev
+#######################################
+
+# keyboard fn-keys
+# $USER needs to be in video group for this to work
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# start a terminal
+bindsym $mod+Return exec $TERMINAL
+
+# kill focused window
+bindsym $mod+q kill
+
+# lock/poweroff screen
+bindsym --release $mod+BackSpace exec --no-startup-id i3lock-script
+bindsym --release $mod+Shift+BackSpace exec --no-startup-id ~/.config/rofi/launch.sh powermenu
+
+# dmenu/window switcher ect
+bindsym $mod+Tab exec --no-startup-id ~/.config/rofi/launch.sh windows
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/launch.sh fullscreen
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+## split in orientations
+bindsym $mod+g split h
+bindsym $mod+v split v
+
+# floating windows
+## toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+## change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent / child container
+bindsym $mod+Shift+z focus parent
+bindsym $mod+z focus child
+
+# scratchpad movement and focus
+bindsym $mod+Shift+a $move_scratchpad
+bindsym $mod+a scratchpad show
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+#######################################
+# Hotkeys with bound modes
+#######################################
+
+# shortcut launching mode
+set $mode_launcher Launch: [f]irefox [c]ode [n]vim fil[e]s [t]eams
+bindsym $mod+r mode "$mode_launcher"
+mode "$mode_launcher" {
+    bindsym f exec firefox; mode "default"
+    bindsym c exec code; mode "default"
+    bindsym n exec --no-startup-id $TERMINAL -e nvim; mode "default"
+    bindsym e exec thunar; mode "default"
+    bindsym t exec teams; mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym $mod+r mode "default"
+    bindsym q mode "default"
+}
+
+# screenshot settings
+set $mode_screenshot Screenshot: [s]creen [w]indow [r]ectangle
+bindsym --release Print exec --no-startup-id screenshot
+bindsym Shift+Print mode "$mode_screenshot"
+mode "$mode_screenshot" {
+    bindsym --release s exec --no-startup-id screenshot screen; mode "default"
+    bindsym --release w exec --no-startup-id screenshot window; mode "default"
+    bindsym --release r exec --no-startup-id screenshot select; mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym $mod+r mode "default"
+    bindsym q mode "default"
+}
+
+#######################################
+# Window movement/resizing settings
+#######################################
+
+# change focus
+bindsym $mod+j focus down
+bindsym $mod+Down focus down
+bindsym $mod+k focus up
+bindsym $mod+Up focus up
+bindsym $mod+h focus left
+bindsym $mod+Left focus left
+bindsym $mod+l focus right
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Right move right
+
+# resize focused window (you can also use the mouse for that)
+bindsym $mod+Ctrl+j resize grow height 5 px or 5 ppt
+bindsym $mod+Ctrl+Down resize grow height 5 px or 5 ppt
+bindsym $mod+Ctrl+k resize shrink height 5 px or 5 ppt
+bindsym $mod+Ctrl+Up resize shrink height 5 px or 5 ppt
+bindsym $mod+Ctrl+h resize grow width 5 px or 5 ppt
+bindsym $mod+Ctrl+Left resize grow width 5 px or 5 ppt
+bindsym $mod+Ctrl+l resize shrink width 5 px or 5 ppt
+bindsym $mod+Ctrl+Right resize shrink width 5 px or 5 ppt
+
+#######################################
+# Workspace settings
+#######################################
+
+# We use numbers for workspaces so we can use the strip_workspace_numbers option
+
+# switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+#######################################
+# Color settings
+#######################################
+# Set colors from Xresources
+set_from_resource $fg i3wm.foreground #ffffff
+set_from_resource $bg i3wm.color0 #000000
+set_from_resource $bgf i3wm.color8 #222222
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bgf    $bg     $fg  $bgf      $bgf
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
+

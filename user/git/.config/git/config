@@ -1,0 +1,34 @@
+[user]
+	name = Brian Janssen
+	email = brian-janssen@hotmail.com
+[core]
+	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[commit]
+	verbose = true
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[alias]
+	graph = log --graph --all --abbrev-commit --date=human --pretty=format:'%Cred%h%Creset -%C(bold yellow)%d%Creset %s %C(cyan dim)<%an> %Cgreen(%cr)%Creset'
+[log]
+	date = human
+[github]
+	user = tosti007
+[gitlab]
+	user = tosti007
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

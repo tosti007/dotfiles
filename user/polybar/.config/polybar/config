@@ -1,0 +1,137 @@
+[global/wm]
+margin-top = 5
+margin-bottom = 0
+
+[settings]
+screenchange-reload = true
+
+[colors]
+background = ${xrdb:background:#000000}
+background-alt = ${xrdb:color0:#222222}
+foreground = ${xrdb:foreground:#ffffff}
+foreground-alt = ${xrdb:color15:#999999}
+primary = ${xrdb:color10:#00ff00}
+secondary = ${xrdb:color12:#0000ff}
+alert = ${xrdb:color9:#ff0000}
+
+[bar/top]
+enable-ipc = true
+bottom = false
+override-redirect = true
+wm-restack = i3
+fixed-center = true
+tray-position = none
+
+width = 100%
+height = 24
+offset-x = 0
+offset-y = -8
+
+;radius = 6.0
+padding = 1
+module-margin-left = 1
+module-margin-right = 1
+
+border-size = 8
+border-color = ${colors.background-alt}
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = "InputSans Nerd Font:style=Regular:size=10;2"
+font-1 = "InputSans Nerd Font:style=Bold:size=12;4"
+font-2 = "InputSans Nerd Font:style=Italic:size=8;2"
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = pointer
+
+modules-left = i3 spotify
+modules-center = window-title
+modules-right = network-wired network-wireless volume brightness battery time powermenu
+
+[module/i3]
+type = internal/i3
+strip-wsnumbers = true
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = true
+
+;label-separator =
+;label-separator-padding = 1
+
+label-focused = "%icon%%name%"
+label-unfocused = "%icon%%name%"
+label-visible = "%icon%%name%"
+label-urgent = "%icon%%name%"
+
+label-focused-padding = 1
+label-unfocused-padding = 1
+label-visible-padding = 1
+label-urgent-padding = 1
+
+label-focused-background = ${colors.background-alt}
+
+[module/spotify]
+type = custom/ipc
+format-font = 3
+hook-0 = 
+hook-1 = spotify current
+
+[module/window-title]
+type = internal/xwindow
+label-empty = ""
+
+[module/network-wired]
+type = internal/network
+interface = enp4s0
+label-connected = ""
+label-connected-alignment = right
+
+[module/network-wireless]
+type = internal/network
+interface = wlp5s0
+label-connected= "直%signal%%"
+
+[module/volume]
+type = internal/pulseaudio
+label-volume = "墳%percentage%%"
+label-muted = "ﱝ%percentage%%"
+
+[module/brightness]
+type = internal/xbacklight
+label = "盛%percentage%%"
+
+[module/battery]
+type = internal/battery
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = AC0
+
+low-at = 15
+format-low-background = ${colors.alert}
+
+label-full = "%percentage%%"
+label-charging = "%percentage%%"
+label-low = "%percentage%%"
+label-discharging = "%percentage%%"
+
+[module/time]
+type = internal/date
+label = "%date%%time%"
+label-font = 2
+date = ""
+time = "%H:%M"
+date-alt = "%A, %d %B %Y, "
+time-alt = "%H:%M:%S"
+
+[module/powermenu]
+type = custom/text
+content = "襤"
+click-left = ~/.config/rofi/launch.sh powermenu
+click-right = lock
+
+; vim:ft=dosini

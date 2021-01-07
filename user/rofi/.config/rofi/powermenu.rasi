@@ -1,0 +1,26 @@
+configuration {
+    theme: "menu";
+}
+
+@import "fullscreen.rasi"
+
+window {
+    padding:
+        // 50% - (mainbox.padding + elem.pad + elem.marg) - (icon.size + font.height) / 2 - mainbox.border
+        calc(50% - (23px + 15px + 15px) - (86px + 20px) / 2 - 16px)
+        // 50% - (mainbox.padding + 1.5*list.spacing) - ((elem.pad+elem.marg)*2 + icon.size) * 2 - mainbox.border - hackyfix
+	    calc(50% - (23px + 8px + 8px / 2) - ((15px + 15px) * 2 + 86px) * 2 - 16px - 1px)
+        ;
+}
+
+mainbox {
+    children: [listview];
+}
+
+listview {
+    padding: 0px;
+    margin: 0px;
+    columns: 4;
+    layout: horizontal;
+}
+

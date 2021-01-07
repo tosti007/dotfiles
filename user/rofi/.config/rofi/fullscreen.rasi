@@ -1,0 +1,19 @@
+configuration {         
+    theme: "fullscreen";         
+    modi: "drun,combi,run";
+    display-drun: "Apps";
+    display-combi: "General";
+    display-run: "Command";
+}
+
+@import "base.rasi"
+
+window {
+    fullscreen: true;
+    width: 100%;
+    padding: 18% 25%;
+}
+
+listview {
+    columns: 4;
+}

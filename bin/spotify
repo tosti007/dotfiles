@@ -1,0 +1,94 @@
+#!/bin/bash
+# Partially taken from https://gist.github.com/wandernauta/6800547
+
+# Quit the script if any command fails
+set -e
+
+__usage="
+Spotify-tui and Spotifyd wrapper commands
+
+Usage: $(basename $0) [COMMAND] [OPTIONS]
+
+Commands:
+  [none]	Start the spotify-tui screen
+  start		Start spotifyd
+  stop		Stop spotifyd
+  play		Play music
+  pause		Pause music
+  next		Play the next track
+  previous	Play the previous track
+  current 	Displays the current track and artist
+
+Options:
+  -h, --help	Show this output
+"
+
+function controll {
+	systemctl --user $1 spotifyd.service
+}
+
+function send {
+	dbus-send --print-reply \
+		--dest="org.mpris.MediaPlayer2.spotifyd" \
+		/org/mpris/MediaPlayer2 \
+		"org.mpris.MediaPlayer2.Player.${1^}" \
+		> /dev/null
+}
+
+function get-song-data(){
+        songdata=`dbus-send --print-reply \
+        --dest="org.mpris.MediaPlayer2.spotifyd" \
+        /org/mpris/MediaPlayer2 \
+        org.freedesktop.DBus.Properties.Get \
+        string:org.mpris.MediaPlayer2.Player \
+        string:Metadata \
+        2> /dev/null | \
+        sed -En 's/^.*(int32|int64|double|string) (.*)/\2/p' | \
+        tr -d '"' | \
+        sed 's/^mpris/xesam/' | \
+        sed ':start N
+                /^xesam.*xesam/ !{
+                        s/\n/, /
+                        b start
+                }
+                P; D' | \
+        sed -E 's/^xesam:([^,]*), /\1:/' | \
+	sed -E 's/ ?\(.*\)//'`
+}
+
+
+function search-song-data(){
+        sed -En "/$1:/ { s/$1://; p }" <<< "$songdata"
+}
+
+case $1 in
+-h | --help | help)
+	echo "$__usage"
+	exit 0
+	;;
+'')
+	spt
+	;;
+current)
+	get-song-data
+        title=`search-song-data 'title'`
+        artist=`search-song-data 'artist'`
+        echo "$title — $artist"
+	;;
+start)
+	controll $1
+	;;
+stop)
+	send $1
+	# we have to wait a bit for the call to actually come through
+	sleep 1s
+	controll $1
+	;;
+play | pause | next | previous)
+	send $1
+	;;
+*)
+	echo "No such command"
+	exit 1
+esac
+

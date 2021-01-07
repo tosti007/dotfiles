@@ -1,0 +1,99 @@
+#!/bin/bash
+
+# Quit the script if any command fails
+set -e
+
+source ../assets/ask.sh
+
+__usage="
+Jupyter Notebook utility tool
+
+Usage: $(basename $0) [COMMAND]
+
+Commands:
+  mk, create [name]		Create a python and Notebook environment
+  rm, remove [name]		Remove a python and Notebook environment
+   s, start  [file]		Start the Jupyter Notebook given a file.
+                   		If no file is given it will search the current directory for one.
+  in, install [packages]	Install some default packages, or install listed packages.
+  ls, list         		List the possible Notebook environments.
+"
+
+kerneldir="$HOME/.local/share/jupyter/kernels/"
+
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+	-h | --help | help)
+		echo "$__usage"
+		exit 0
+		;;
+	mk | create)
+		echo "Creating environment $2"
+		python -m venv env
+		source env/bin/activate
+		pip install -q --upgrade pip
+		pip install -q ipykernel
+		python -m ipykernel install --user --name="$2"
+		exit 0
+		;;
+	rm | remove)
+		if [ ! -d "$kerneldir$2" ]; then
+			echo "Kernel $2 does not exist."
+			exit 1
+		fi
+		rm -rf env
+		jupyter kernelspec uninstall -f --log-level ERROR "$2"
+		echo "Removed kernel $2"
+		exit 0
+		;;
+	s | start)
+		file="$2"
+		if [ -z "$file" ]; then
+			file="$(find . -maxdepth 1 -name "*.ipynb")"
+			if [ "$(wc -l <<<"$file")" -ne 1 ]; then
+				echo "Multiple options of python notebooks, pass as argument instead"
+				exit 1
+			fi
+		fi
+		echo -e "\033[0;31mDo not forget to select the correct kernel!"
+		sourcepath="$(dirname $file)/env/bin/activate"
+		if [[ -f "$sourcepath" ]]; then
+			source $sourcepath
+		else
+			source env/bin/activate
+		fi
+		jupyter notebook "$file"
+		exit 0
+		;;
+	in | install)
+		source env/bin/activate
+		shift
+		if [ $# -eq 0 ]; then
+			# No packages given
+			packages=(numpy pandas seaborn scipy sklearn)
+			if ask 'Install everything?' N; then
+				NO_ASK=1
+			fi
+		else
+			packages="$@"
+			NO_ASK=1
+		fi
+		for item in ${packages[*]}; do
+			if [[ -n "$NO_ASK" ]] || ask "Install $item?" Y; then
+				echo -e "\tInstalling $item"
+				pip install -q "$item"
+			fi
+		done
+		exit 0
+		;;
+	ls | list)
+		ls $kerneldir
+		exit 0
+		;;
+	*)
+		echo "Unknown parameter passed: $1"
+		exit 1
+		;;
+	esac
+	shift
+done

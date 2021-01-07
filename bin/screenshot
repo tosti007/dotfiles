@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Quit the script if any command fails
+set -e
+
+__usage="
+ImageMagick screenshot utility tool
+Uses screen command as default
+
+Usage: $(basename $0) [COMMAND] [OPTIONS]
+
+Commands:
+  select 			Select a rectangle or window to capture
+  window			Capture the focussed window
+  screen			Capture the whole screen
+
+Options:
+  -h,--help			Print this output
+  -c,--clipboard		Copy the file to clipboard
+  -o,--output			Path to safe the file to
+  				Can use date command formatting
+  				Defaults to ~/Pictures/screenshot_YYYY-MM-DD_HH:MM:SS.jpg
+"
+
+params='-window root'
+output="~/Pictures/screenshot_%F_%T.jpg"
+
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+	-h | --help | help)
+		echo "$__usage"
+		exit 0
+		;;
+	select)
+		if [[ -n "$params_set" ]]; then
+			echo "Can only use one command!"
+			exit 1
+		fi
+		params=''
+		params_set=1
+		;;
+	window)
+		if [[ -n "$params_set" ]]; then
+			echo "Can only use one command!"
+			exit 1
+		fi
+		params="-window $(xdotool getwindowfocus)"
+		params_set=1
+		;;
+	screen)
+		if [[ -n "$params_set" ]]; then
+			echo "$params"
+			echo "Can only use one command!"
+			exit 1
+		fi
+		params='-window root'
+		params_set=1
+		;;
+	-o | --output)
+		output="$2"
+		shift
+		;;
+	-c | --clipboard)
+		echo "This is not yet implemented!"
+		exit 1
+		;;
+	*)
+		echo "Unknown command/parameter passed: $1"
+		exit 1
+		;;
+	esac
+	shift
+done
+
+eval "import $params $(date +"$output")"

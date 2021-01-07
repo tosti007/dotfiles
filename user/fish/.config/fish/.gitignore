@@ -1,0 +1,12 @@
+completions/
+fish_universal_variables
+fish_variables
+fishd.*
+
+# Plugins
+conf.d/_*
+conf.d/fzf*
+conf.d/pure.fish
+functions/_*
+functions/fish_*
+

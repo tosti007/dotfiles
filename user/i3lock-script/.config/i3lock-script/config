@@ -1,0 +1,19 @@
+[general]
+	use-pywal = true
+[screen]
+	background-color = $colors.background
+	background-image = ~/.dotfiles/assets/background/background.jpg
+[box]
+	background-color = 000000bf
+[ring]
+	color = $colors.color11
+	color-highlight = $colors.color12
+	color-wrong = $colors.color9
+	color-remove = $ring.color-wrong
+[text]
+	font = InputSans Nerd Font:style=Regular
+	color = $colors.foreground
+[time]
+	width = 6
+[date]
+	width = 18

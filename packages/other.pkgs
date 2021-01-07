@@ -1,0 +1,14 @@
+# Packages that do not fit in any config pkg list
+# However still listed as they are often used.
+keepassxc
+libreoffice-still
+firefox
+discord
+
+# Nice alternatives to build in commands
+exa
+bat
+fd
+ripgrep
+nnn
+

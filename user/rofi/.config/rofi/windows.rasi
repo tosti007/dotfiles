@@ -1,0 +1,40 @@
+configuration {
+    theme: "windows";
+    modi: "window";
+}
+
+@import "base.rasi"
+
+window {
+    location: northwest;
+    anchor: northwest;
+    width: calc(20% + 6px); // 20% + border radius
+    x-offset: calc(-6px - 8px - 1px); // - (border radius + mainbox.border / 2 + hacky fix)
+}
+
+mainbox {
+    padding: 20px 20px 20px 26px; // base (+ border radius for left side)
+    children: [inputbar,listview];
+}
+
+inputbar {
+    children: [entry];
+}
+
+listview {
+    columns: 1;
+}
+
+element {
+    orientation: horizontal;
+}
+
+element-icon {
+    size: 64px;
+    margin: 0 15px 0 0; // inner / 2
+}
+
+element-text {
+    horizontal-align: 0;
+}
+
