@@ -71,6 +71,7 @@ else
 fi
 
 if [[ -n "$UPDATE_CONFIG" ]]; then
+	mkdir -p "$dir_cache"
 	##############################
 	# Pywal setting
 	##############################
