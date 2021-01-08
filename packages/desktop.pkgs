@@ -24,3 +24,6 @@ polybar
 # composer
 picom-git
 
+# clipboard
+xsel
+
