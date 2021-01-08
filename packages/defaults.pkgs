@@ -1,6 +1,8 @@
 # Just some tools assumed to be installed already
 # but for the sake of completeness I will add them here too
-base-devel
+fakeroot
+make
+gcc
 bash
 curl
 grep
