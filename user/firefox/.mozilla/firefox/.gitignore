@@ -1,0 +1,6 @@
+*
+!.gitignore
+!profiles.ini
+!startpage
+!main.default/chrome/*
+!main.default/user.js
