@@ -1,6 +1,6 @@
-<g class="order$colors" viewBox="0 0 105 110" transform="scale($scale) translate($x, $y)">
-  <path class="frame" d="M0 1.5L1.5 0h10v.8H58L59.2 2h23.3L83.7.8H93l.8-.8H98l7 7v101.5l-1.5 1.5H1.5L0 108.5zM3.2 99.2v4.8h4.8v-4.8zM97 99.2v4.8h4.8v-4.8z"/>
-  <path class="slide" d="M24.5 0h57v36L80 37.5H26L24.5 36zM58 6v30h14V6z"/>
-  <path class="indent" d="M12.5 49.5l1-1h78l1 1V110h-80z"/>
-  <path class="bar" d="M12.5 110v-6h80v6z"/>
+<g class="order$colors" viewBox="0 0 110 110" transform="scale($scale) translate($x, $y)">
+  <path class="frame" d="M2.5 1.5L4 0h10v.8h46.5L61.7 2H85L86.2.8h9.3l.8-.8h4.2l7 7v101.5L106 110H4l-1.5-1.5zm3.2 97.7v4.8h4.8v-4.8zm93.8 0v4.8h4.8v-4.8z"/>
+  <path class="slide" d="M27 0h57v36l-1.5 1.5h-54L27 36zm33.5 6v30h14V6z"/>
+  <path class="indent" d="M15 49.5l1-1h78l1 1V110H15z"/>
+  <path class="bar" d="M15 110v-6h80v6z"/>
 </g>

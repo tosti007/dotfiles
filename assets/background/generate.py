@@ -43,7 +43,7 @@ def read_color_order(idx, order, colors):
 def create_colors(orders, colors):
     return [read_color_order(n, o, colors) for n, o in enumerate(orders)]
 
-main['size_x'] = 105 + main['margin'] * 2
+main['size_x'] = 110 + main['margin'] * 2
 main['size_y'] = 110 + main['margin'] * 2
 
 colors_data = read_colors()
