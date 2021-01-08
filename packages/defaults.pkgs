@@ -5,7 +5,6 @@ make
 gcc
 bash
 curl
-grep
 htop
 less
 openssh
