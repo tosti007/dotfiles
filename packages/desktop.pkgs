@@ -5,6 +5,8 @@ ttf-nerd-fonts-input
 
 # theming
 python-pywal
+feh
+python2 # for gtk theme reloading with pywal
 
 # i3
 i3-gaps
