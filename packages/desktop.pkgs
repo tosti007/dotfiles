@@ -24,6 +24,9 @@ polybar
 # composer
 picom-git
 
+# dmenu
+rofi
+
 # clipboard
 xsel
 
