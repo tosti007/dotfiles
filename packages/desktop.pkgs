@@ -18,15 +18,10 @@ rxvt-unicode
 urxvt-vtwheel
 urxvt-resize-font-git
 
-# statusbar
+# other
 polybar
-
-# composer
 picom-git
-
-# dmenu
 rofi
-
-# clipboard
 xsel
+xorg-xbacklight
 
