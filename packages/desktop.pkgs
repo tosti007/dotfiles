@@ -3,6 +3,11 @@
 # font
 ttf-nerd-fonts-input 
 
+# audio
+pulseaudio
+pulseaudio-alsa
+pavucontrol
+
 # theming
 python-pywal
 feh
@@ -11,6 +16,7 @@ python2 # for gtk theme reloading with pywal
 # i3
 i3-gaps
 i3lock-color
+i3wsr
 
 # terminal/shell
 fish
@@ -18,10 +24,13 @@ rxvt-unicode
 urxvt-vtwheel
 urxvt-resize-font-git
 
+# rofi/dmenu
+rofi
+rofi-dmenu
+
 # other
 polybar
 picom-git
-rofi
 xsel
 xorg-xbacklight
 
