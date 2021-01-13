@@ -1,0 +1,12 @@
+element {
+    orientation: vertical;
+}
+
+element-icon {
+    margin: 0;
+}
+
+element-text {
+    horizontal-align: 0.5;
+}
+

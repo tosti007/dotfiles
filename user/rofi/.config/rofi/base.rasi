@@ -3,8 +3,10 @@ configuration {
     combi-modi: "window,drun,run";
     show-icons: true;
     font: "Hack 11";
+    terminal: "urxvt";
     run-command: "fish -c '{cmd}'";
     window-thumbnail: true;
+    window-format: "{t}";
 }
 
 @import "colors.rasi"
@@ -18,14 +20,13 @@ configuration {
 }
 
 window {
-    height: 100%;
 }
 
 mainbox {
     border: 16;
     padding: 23px; // inner / 2 + outer
     background-color: @color0;
-    children: [mode-switcher,inputbar,listview];
+    children: [mode-switcher,inputbar,message,listview];
 }
 
 button {
@@ -49,8 +50,7 @@ inputbar {
 
 textbox-prompt-colon {
     expand:     false;
-    str:        ":";
-    margin:     0px 0.3em 0em 0em ;
+    str:        ": ";
 }
 
 entry {
@@ -58,28 +58,24 @@ entry {
 }
 
 listview {
-    padding: 15px; // inner / 2
-    spacing: 8px; // outer
-    cycle: false;
-    dynamic: false;
     layout: vertical;
-    background-color: transparent;
-    fixed-columns: true;
-    fixed-lines: true;
+    padding: 15px; // inner / 2
+    spacing: 15px; // inner / 2
+    cycle: false;
+    lines: 6;
 }
 
 element {
-    margin: 15px; // inner / 2
     padding: 15px; // inner / 2
-    orientation: vertical;
 }
 
 element-icon {
-    size: 86px;
+    margin: 0 15px 0 0; // inner / 2
+    size: 32px;
 }
 
 element-text {
-    horizontal-align: 0.5;
+    horizontal-align: 0;
     vertical-align: 0.5;
 }
 

@@ -7,13 +7,14 @@ configuration {
 }
 
 @import "base.rasi"
-
-window {
-    fullscreen: true;
-    width: 100%;
-    padding: 18% 25%;
-}
+@import "icon-large.rasi"
+@import "element-vertical.rasi"
 
 listview {
+    dynamic: false;
+    fixed-columns: true;
+    fixed-lines: true;
     columns: 4;
+    lines: 4;
 }
+

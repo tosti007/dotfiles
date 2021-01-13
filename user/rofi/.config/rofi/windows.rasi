@@ -4,6 +4,7 @@ configuration {
 }
 
 @import "base.rasi"
+@import "icon-large.rasi"
 
 window {
     location: northwest;
@@ -19,22 +20,5 @@ mainbox {
 
 inputbar {
     children: [entry];
-}
-
-listview {
-    columns: 1;
-}
-
-element {
-    orientation: horizontal;
-}
-
-element-icon {
-    size: 64px;
-    margin: 0 15px 0 0; // inner / 2
-}
-
-element-text {
-    horizontal-align: 0;
 }
 
