@@ -57,6 +57,18 @@ entry {
     text-color: @foreground;
 }
 
+message {
+    margin: 8px; // outer
+    padding: 8px; // outer
+    background-color: @background;
+}
+
+textbox {
+    text-color: @foreground;
+    horizontal-align: 0;
+    vertical-align: 0.5;
+}
+
 listview {
     layout: vertical;
     padding: 15px; // inner / 2
