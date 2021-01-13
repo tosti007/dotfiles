@@ -74,7 +74,7 @@ listview {
     padding: 15px; // inner / 2
     spacing: 15px; // inner / 2
     cycle: false;
-    lines: 6;
+    lines: 8;
 }
 
 element {
@@ -83,7 +83,7 @@ element {
 
 element-icon {
     margin: 0 15px 0 0; // inner / 2
-    size: 32px;
+    size: 16px;
 }
 
 element-text {
