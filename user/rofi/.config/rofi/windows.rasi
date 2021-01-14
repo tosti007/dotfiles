@@ -10,6 +10,7 @@ window {
     location: northwest;
     anchor: northwest;
     width: calc(20% + 6px); // 20% + border radius
+    height: 100%;
     x-offset: calc(-6px - 8px - 1px); // - (border radius + mainbox.border / 2 + hacky fix)
 }
 
