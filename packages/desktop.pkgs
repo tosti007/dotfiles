@@ -19,10 +19,16 @@ i3lock-color
 i3wsr
 
 # terminal/shell
-fish
 rxvt-unicode
 urxvt-vtwheel
 urxvt-resize-font-git
+fish
+## Nice alternatives to build in commands
+exa
+bat
+fd
+ripgrep
+nnn
 
 # rofi/dmenu
 rofi
