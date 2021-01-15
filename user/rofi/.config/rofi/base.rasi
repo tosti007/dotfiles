@@ -9,11 +9,11 @@ configuration {
     window-format: "{t}";
 }
 
-@import "colors.rasi"
+@import "~/.cache/wal/colors.rasi"
 
 * {
     border: 0;
-    border-color: @background;
+    border-color: @color0;
     border-radius: 6;
     background-color: transparent;
     text-color: @color15;
@@ -25,7 +25,7 @@ window {
 mainbox {
     border: 16;
     padding: 23px; // inner / 2 + outer
-    background-color: @color0;
+    background-color: @background;
     children: [mode-switcher,inputbar,message,listview];
 }
 
@@ -38,13 +38,13 @@ button, inputbar, entry, case-indicator {
 }
 
 button.selected {
-    background-color: @background;
+    background-color: @color0;
     text-color:       @foreground;
 }
 
 inputbar {
     padding: 8px; // outer
-    background-color: @background;
+    background-color: @color0;
     children: [prompt,textbox-prompt-colon,entry,case-indicator];
 }
 
@@ -60,7 +60,7 @@ entry {
 message {
     margin: 8px; // outer
     padding: 8px; // outer
-    background-color: @background;
+    background-color: @color0;
 }
 
 textbox {
@@ -92,7 +92,7 @@ element-text {
 }
 
 element.selected {
-    background-color: @background;
+    background-color: @color0;
     text-color:       @foreground;
 }
 
