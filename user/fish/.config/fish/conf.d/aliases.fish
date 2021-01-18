@@ -1,4 +1,3 @@
-
 # Command overwrites and shortcuts
 alias rmr "rm -rf"
 alias xsel "xsel --clipboard"
@@ -13,4 +12,13 @@ alias la "ll -a"
 alias cat "bat"
 alias ccat "bat --plain --color never --pager never"
 alias rgpdf "rg --pre rgpdf-pre --pre-glob '*.pdf'"
+
+# git aliases
+alias gis "git status"
+alias gid "git diff"
+alias gia "git add"
+alias gic "git commit -m"
+alias gip "git pull --rebase"
+alias giu "git push"
+alias gir "git reset"
 
