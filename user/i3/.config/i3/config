@@ -61,7 +61,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # start a terminal
-bindsym $mod+Return exec $TERMINAL
+bindsym $mod+Return exec $TERMINAL -e nnn
 
 # kill focused window
 bindsym $mod+q kill
@@ -106,22 +106,6 @@ bindsym $mod+Shift+r restart
 # Hotkeys with bound modes
 #######################################
 
-# shortcut launching mode
-set $mode_launcher Launch: [f]irefox [c]ode [n]vim fil[e]s [t]eams
-bindsym $mod+r mode "$mode_launcher"
-mode "$mode_launcher" {
-    bindsym f exec firefox; mode "default"
-    bindsym c exec code; mode "default"
-    bindsym n exec --no-startup-id $TERMINAL -e nvim; mode "default"
-    bindsym e exec thunar; mode "default"
-    bindsym t exec teams; mode "default"
-
-    bindsym Escape mode "default"
-    bindsym Return mode "default"
-    bindsym $mod+r mode "default"
-    bindsym q mode "default"
-}
-
 # screenshot settings
 set $mode_screenshot Screenshot: [s]creen [w]indow [r]ectangle
 bindsym --release Print exec --no-startup-id screenshot
@@ -130,10 +114,11 @@ mode "$mode_screenshot" {
     bindsym --release s exec --no-startup-id screenshot screen; mode "default"
     bindsym --release w exec --no-startup-id screenshot window; mode "default"
     bindsym --release r exec --no-startup-id screenshot select; mode "default"
+    bindsym --release Print exec --no-startup-id screenshot; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
-    bindsym $mod+r mode "default"
+    bindsym Shift+Print mode "default"
     bindsym q mode "default"
 }
 
