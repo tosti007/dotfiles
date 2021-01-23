@@ -4,5 +4,8 @@ keepassxc
 libreoffice-still
 firefox
 discord
+
+# File viewer
 zathura
+zathura-pdf-mupdf
 
