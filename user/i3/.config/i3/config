@@ -38,7 +38,8 @@ exec --no-startup-id i3lock-script
 exec keepassxc
 exec_always --no-startup-id ~/.fehbg
 
-exec_always --no-startup-id pkill picom; picom -b
+exec_always --no-startup-id pkill unclutter; unclutter --ignore-scrolling
+exec_always --no-startup-id pkill picom; picom
 exec_always --no-startup-id ~/.config/dunst/launch.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3wsr/launch.sh
