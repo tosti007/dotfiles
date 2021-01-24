@@ -1,0 +1,42 @@
+# Zathura Colors
+set completion-bg "{background}"
+set completion-fg "{color15}"
+set completion-group-bg "{background}"
+set completion-group-fg "{color15}"
+set completion-highlight-bg "{color0}"
+set completion-highlight-fg "{foreground}"
+
+set default-bg "{background}"
+set default-fg "{foreground}"
+
+set inputbar-bg "{background}"
+set inputbar-fg "{foreground}"
+
+set notification-bg "{background}" 
+set notification-fg "{foreground}"
+set notification-error-bg "{color9}"
+set notification-error-fg "{background}"
+set notification-warning-bg "{color9}"
+set notification-warning-fg "{background}"
+
+set tabbar-bg "{background}"
+set tabbar-fg "{color15}"
+set tabbar-focus-bg "{color0}"
+set tabbar-focus-fg "{foreground}"
+
+set statusbar-bg "{background}"
+set statusbar-fg "{foreground}"
+
+set highlight-color "{color11}"
+set highlight-active-color "{color10}"
+
+set recolor-darkcolor "{foreground}"
+set recolor-lightcolor "{background}"
+
+set render-loading-bg "{background}"
+set render-loading-fg "{foreground}"
+
+set index-bg "{background}"
+set index-fg "{color15}"
+set index-active-bg "{color0}"
+set index-active-fg "{foreground}"
