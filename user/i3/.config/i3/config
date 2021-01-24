@@ -63,6 +63,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 
 # start a terminal
 bindsym $mod+Return exec $TERMINAL -e nnn
+bindsym $mod+Shift+Return exec $TERMINAL
 
 # kill focused window
 bindsym $mod+q kill
