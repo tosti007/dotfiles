@@ -16,6 +16,7 @@ urxvt = ""
 keepassxc = ""
 vscodium = ""
 "microsoft teams - preview" = ""
+"org.pwmt.zathura" = ""
 
 [aliases]
 "gimp-2.10" = "gimp"

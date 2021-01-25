@@ -32,10 +32,10 @@ map [presentation] h navigate previous
 
 ## Don't quit when in a special mode, but rather toggle that mode
 map [normal] q quit
+### We can use the fullscreen feature of our wm so no need for an additional one.
+map [normal] <F11> toggle_presentation
 map [presentation] <Esc> toggle_presentation
 map [presentation] q toggle_presentation
 map [presentation] <F5> toggle_presentation
-map [fullscreen] <Esc> toggle_fullscreen
-map [fullscreen] q toggle_fullscreen
-map [fullscreen] <F5> toggle_fullscreen
+map [presentation] <F11> toggle_presentation
 
