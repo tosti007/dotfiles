@@ -37,7 +37,7 @@ rofi-dmenu
 # other
 polybar
 picom-git
-xsel
+xclip
 xorg-xbacklight
 unclutter
 
