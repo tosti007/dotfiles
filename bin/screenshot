@@ -17,13 +17,18 @@ Commands:
 Options:
   -h,--help			Print this output
   -c,--clipboard		Copy the file to clipboard
-  -o,--output			Path to safe the file to
+  				Changes the output directory to /tmp, if you do not want this use --no-tmp.
+  --no-tmp			If --clipboard is used, do not change the output directory to /tmp
+  -f,--filename			Filename to safe the image to
   				Can use date command formatting
-  				Defaults to ~/Pictures/screenshot_YYYY-MM-DD_HH:MM:SS.jpg
+  				Defaults to screenshot_YYYY-MM-DD_HH:MM:SS.png
+  -d,--directory		Directory to safe the image in.
+  				Defaults to ~/Pictures/
 "
 
 params='-window root'
-output="~/Pictures/screenshot_%F_%T.jpg"
+output_file="screenshot_%F_%T.png"
+output_dir="$HOME/Pictures/"
 
 while [[ "$#" -gt 0 ]]; do
 	case $1 in
@@ -36,33 +41,38 @@ while [[ "$#" -gt 0 ]]; do
 			echo "Can only use one command!"
 			exit 1
 		fi
-		params=''
 		params_set=1
+		params=''
 		;;
 	window)
 		if [[ -n "$params_set" ]]; then
 			echo "Can only use one command!"
 			exit 1
 		fi
-		params="-window $(xdotool getwindowfocus)"
 		params_set=1
+		params="-window $(xdotool getwindowfocus)"
 		;;
 	screen)
 		if [[ -n "$params_set" ]]; then
-			echo "$params"
 			echo "Can only use one command!"
 			exit 1
 		fi
-		params='-window root'
 		params_set=1
+		params='-window root'
 		;;
-	-o | --output)
-		output="$2"
+	-f | --filename)
+		output_file="$2"
+		shift
+		;;
+	-d | --directory)
+		output_dir="$2"
 		shift
 		;;
 	-c | --clipboard)
-		echo "This is not yet implemented!"
-		exit 1
+		copy_to_clipboard=1
+		;;
+	--no-tmp)
+		no_tmp=1
 		;;
 	*)
 		echo "Unknown command/parameter passed: $1"
@@ -72,4 +82,16 @@ while [[ "$#" -gt 0 ]]; do
 	shift
 done
 
-eval "import $params $(date +"$output")"
+if [[ -n "$copy_to_clipboard" && -z "$no_tmp" ]]; then
+	output_dir="/tmp/"
+fi
+
+output="$output_dir$(date +"$output_file")"
+
+eval "import $params $output"
+
+if [[ -n "$copy_to_clipboard" ]]; then
+	filetype="$(file -b --mime-type "$output")"
+	xclip -in -selection clipboard -target "$filetype" "$output"
+fi
+

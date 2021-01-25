@@ -109,14 +109,14 @@ bindsym $mod+Shift+r restart
 #######################################
 
 # screenshot settings
-set $mode_screenshot Screenshot: [s]creen [w]indow [r]ectangle
+set $mode_screenshot Screenshot to clipboard: [s]creen [w]indow [r]ectangle
 bindsym --release Print exec --no-startup-id screenshot
 bindsym Shift+Print mode "$mode_screenshot"
 mode "$mode_screenshot" {
-    bindsym --release s exec --no-startup-id screenshot screen; mode "default"
-    bindsym --release w exec --no-startup-id screenshot window; mode "default"
-    bindsym --release r exec --no-startup-id screenshot select; mode "default"
-    bindsym --release Print exec --no-startup-id screenshot; mode "default"
+    bindsym --release s exec --no-startup-id screenshot screen --clipboard; mode "default"
+    bindsym --release w exec --no-startup-id screenshot window --clipboard; mode "default"
+    bindsym --release r exec --no-startup-id screenshot select --clipboard; mode "default"
+    bindsym --release Print exec --no-startup-id screenshot --clipboard; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
