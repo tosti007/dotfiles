@@ -1,5 +1,6 @@
 [general]
 	use-pywal = true
+	arguments = --ignore-empty-password --pass-media-keys --pass-screen-keys --pass-power-keys
 [screen]
 	background-color = $colors.background
 	background-image = ~/.dotfiles/assets/background/background.jpg

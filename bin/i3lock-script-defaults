@@ -1,5 +1,6 @@
 [general]
 	use-pywal = false
+	arguments = 
 [screen]
 	background-color = 000000ff
 	background-image = 
@@ -19,8 +20,10 @@
 	color = ffffffff
 	spacing = 6
 [time]
-        width = 4
+	format = %H:%M:%S
+	width = 4
 	size = 60
 [date]
-        width = 13
+	format = %A, %-d %B %Y
+	width = 13
 	size = 30
