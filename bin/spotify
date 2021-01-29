@@ -1,9 +1,6 @@
 #!/bin/bash
 # Partially taken from https://gist.github.com/wandernauta/6800547
 
-# Quit the script if any command fails
-set -e
-
 __usage="
 Spotify-tui and Spotifyd wrapper commands
 
@@ -11,8 +8,6 @@ Usage: $(basename $0) [COMMAND] [OPTIONS]
 
 Commands:
   [none]	Start the spotifyd process and spotify-tui screen
-  ui		Open just a spotify-tui screen
-  process	Start just a spotifyd process
   play		Play music
   pause		Pause music
   next		Play the next track
@@ -67,16 +62,10 @@ case $1 in
 	exit 0
 	;;
 '')
-	spotifyd --no-daemon > /dev/null 2>&1 &
-	spotifyd_pid="$!"
+	trap 'exit 0' INT TERM
+	trap 'controll stop; PLAYER_EVENT='stop' ~/.config/spotifyd/hooks.sh' EXIT
+	controll start
 	spt
-	kill "$spotifyd_pid"
-	;;
-ui)
-	spt
-	;;
-process)
-	spotifyd --no-daemon
 	;;
 current)
 	get-song-data
