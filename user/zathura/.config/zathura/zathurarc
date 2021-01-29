@@ -8,7 +8,8 @@ include "../../../../../.cache/wal/colors.zathura"
 # Visual settings
 set font "InputSans Nerd Font" normal 9
 set recolor true
-set recolor-reverse-video false
+set recolor-keephue true
+set recolor-reverse-video true
 
 # Title/filename output settings
 set window-title-basename false
@@ -35,8 +36,10 @@ map [presentation] h navigate previous
 map [normal] q quit
 ### We can use the fullscreen feature of our wm so no need for an additional one.
 map [normal] <F11> toggle_presentation
+map [normal] f toggle_presentation
 map [presentation] <Esc> toggle_presentation
 map [presentation] q toggle_presentation
 map [presentation] <F5> toggle_presentation
 map [presentation] <F11> toggle_presentation
+map [presentation] f toggle_presentation
 
