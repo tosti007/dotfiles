@@ -15,8 +15,9 @@ python2 # for gtk theme reloading with pywal
 
 # i3
 i3-gaps
-i3lock-color
 i3wsr
+i3lock-color
+xss-lock
 
 # terminal/shell
 rxvt-unicode

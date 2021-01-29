@@ -1,14 +1,6 @@
 # i3 config file (v4)
 # See https://i3wm.org/docs/userguide.html for complete reference
 
-######################################
-# TODO settings
-######################################
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
 #######################################
 # General settings
 #######################################
@@ -30,19 +22,21 @@ gaps top 32 # outer + polybar = 8 + 24
 #######################################
 # Auto-startup and execute settings
 #######################################
-# reload colors in case anything changed.
-exec_always --no-startup-id ~/.dotfiles/user/pywal/restore
-
-# Lock on startup, as we aren't using the greeter.
-exec --no-startup-id i3lock-script
-exec keepassxc
-exec_always --no-startup-id ~/.fehbg
-
+# Start things we need for our desktop
 exec_always --no-startup-id pkill unclutter; unclutter --ignore-scrolling
 exec_always --no-startup-id pkill picom; picom
+exec_always --no-startup-id ~/.dotfiles/user/pywal/restore
+exec_always --no-startup-id ~/.fehbg
 exec_always --no-startup-id ~/.config/dunst/launch.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3wsr/launch.sh
+
+# Setup locking and screensaver. Also lock on startup, as we aren't using the greeter.
+exec --no-startup-id ~/.config/xss-lock/launch.sh
+exec --no-startup-id ~/.config/xss-lock/lock.sh
+
+# Launch auto-startup programs
+exec keepassxc
 
 for_window [class="URxvt" title="^spotify"] $move_scratchpad
 for_window [class="KeePassXC"] $move_scratchpad
@@ -69,7 +63,7 @@ bindsym $mod+Shift+Return exec $TERMINAL
 bindsym $mod+q kill
 
 # lock/poweroff screen
-bindsym --release $mod+BackSpace exec --no-startup-id i3lock-script
+bindsym --release $mod+BackSpace exec --no-startup-id loginctl lock-session
 bindsym --release $mod+Shift+BackSpace exec --no-startup-id ~/.config/rofi/launch.sh powermenu
 
 # dmenu/window switcher ect

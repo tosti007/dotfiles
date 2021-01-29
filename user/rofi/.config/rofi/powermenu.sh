@@ -16,7 +16,7 @@ case "$1" in
 	echo -e "$suspend"
 	;;
 Lock)
-	i3lock-script
+	loginctl lock-session
 	;;
 Suspend)
 	systemctl suspend
