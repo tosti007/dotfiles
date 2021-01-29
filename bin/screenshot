@@ -43,6 +43,9 @@ while [[ "$#" -gt 0 ]]; do
 		fi
 		params_set=1
 		params=''
+		# We need to make sure the mouse is visable
+		xdotool mousemove_relative 0 1
+		xdotool mousemove_relative 0 -1
 		;;
 	window)
 		if [[ -n "$params_set" ]]; then
