@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Spotify
+GenericName=Music Player
+TryExec=spotify
+Exec=spotify
+Terminal=true
+Type=Application
+Icon=spotify
+Categories=Audio;Music;Player;AudioVideo;
+StartupWMClass=spotify
