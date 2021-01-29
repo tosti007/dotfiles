@@ -1,4 +1,5 @@
 # Command overwrites and shortcuts
+alias n "nnn"
 alias rmr "rm -rf"
 alias xsel "xsel --clipboard"
 alias tree "tree -C"
