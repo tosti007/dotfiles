@@ -4,7 +4,6 @@
 # Run before starting the locker
 pre_lock() {
 	#spotify pause?
-	echo "lock"
 	return
 }
 
@@ -15,7 +14,6 @@ run_lock() {
 
 # Run after the locker exits
 post_lock() {
-	echo "lock"
 	return
 }
 

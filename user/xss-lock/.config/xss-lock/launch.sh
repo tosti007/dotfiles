@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Quit the script if any command fails
-set -e
-
 cd "$(dirname "$0")"
 
-# Dim the screen after three minutes of inactivity, lock the screen two minutes later
-xset s 180 120
+pkill xss-lock
 
-xss-lock -n ./dim.sh -l -- ./lock.sh
+# Dim the screen after three minutes of inactivity, lock the screen two minutes later
+xset s 300 120
+
+xss-lock -n $(realpath ./dim.sh) -l -- $(realpath ./lock.sh)
 

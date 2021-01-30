@@ -12,7 +12,9 @@ set_brightness() {
 	xbacklight -set $@
 }
 
-trap "set_brightness $(get_brightness)" TERM INT
+trap "exit 0" TERM INT
+trap "set_brightness $(get_brightness); kill %%" EXIT
 set_brightness $dim_brightness
-sleep infinity
+sleep infinity &
+wait
 
