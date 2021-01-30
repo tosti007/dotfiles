@@ -38,7 +38,7 @@ exec --no-startup-id ~/.config/xss-lock/lock.sh
 # Launch auto-startup programs
 exec keepassxc
 
-for_window [class="URxvt" title="^spotify"] $move_scratchpad
+for_window [class="URxvt" title="^spotify$"] $move_scratchpad
 for_window [class="KeePassXC"] $move_scratchpad
 for_window [class="feh"] floating enable
 

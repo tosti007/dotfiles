@@ -68,7 +68,9 @@ case $1 in
 	spt
 	;;
 current)
-	get-song-data
+        while [ -z "$songdata" ]; do
+                get-song-data
+        done
         title=`search-song-data 'title'`
         artist=`search-song-data 'artist'`
         echo "$title — $artist"
