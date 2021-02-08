@@ -3,7 +3,7 @@ user_pref("browser.sessionstore.warnOnQuit", false); // Does this imply "Restore
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);
 user_pref("browser.link.open_newwindow", true);
 user_pref("browser.tabs.warnOnClose", false);
-user_pref("browser.tabs.loadInBackground", false);
+user_pref("browser.tabs.loadInBackground", true);
 user_pref("layout.spellcheckDefault", 1);
 user_pref("accessibility.typeaheadfind", false);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
