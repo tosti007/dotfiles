@@ -10,6 +10,7 @@ Commands:
   [none]	Start the spotifyd process and spotify-tui screen
   play		Play music
   pause		Pause music
+  playpause	Toggle music
   next		Play the next track
   previous	Play the previous track
   current 	Displays the current track and artist
@@ -77,6 +78,9 @@ current)
 	;;
 play | pause | next | previous)
 	send $1
+	;;
+playpause)
+	send PlayPause
 	;;
 *)
 	echo "No such command"
