@@ -79,6 +79,9 @@ type = custom/ipc
 format-font = 3
 hook-0 = 
 hook-1 = spotify current
+click-left = spotify playpause
+click-right = spotify next
+click-middle = spotify previous
 
 [module/window-title]
 type = internal/xwindow

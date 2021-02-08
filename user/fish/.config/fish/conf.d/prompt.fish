@@ -32,7 +32,7 @@ end
 # Show directory
 function show_pwd -d "Show the current directory"
   set -l pwd (prompt_pwd)
-  prompt_segment normal green " $pwd "
+  prompt_segment normal $fish_color_cwd " $pwd "
 end
 
 # Show prompt w/ privilege cue
