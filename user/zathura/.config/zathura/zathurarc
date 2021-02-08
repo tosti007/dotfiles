@@ -25,6 +25,7 @@ set first-page-column 1:1
 # Hotkeys
 ## General
 map [normal] <Space> navigate next
+map [presentation] <C-r> recolor
 
 ## Navigate full pages in presentation mode
 map [presentation] j navigate next
