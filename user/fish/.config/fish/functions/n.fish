@@ -1,7 +1,3 @@
-# Rename this file to match the name of the function
-# e.g. ~/.config/fish/functions/n.fish
-# or, add the lines to the 'config.fish' file.
-
 function n --wraps nnn --description 'support nnn quit and change directory'
     # Block nesting of nnn in subshells
     if test -n "$NNNLVL"

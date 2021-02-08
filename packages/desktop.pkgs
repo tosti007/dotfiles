@@ -29,7 +29,10 @@ exa
 bat
 fd
 ripgrep
+
+# File manager
 nnn
+dragon-drag-and-drop
 
 # rofi/dmenu
 rofi

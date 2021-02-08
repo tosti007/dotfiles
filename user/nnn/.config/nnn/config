@@ -1,0 +1,5 @@
+#!/bin/sh
+
+NNN_PLUG_DEFAULT='d:dragdrop'
+export NNN_PLUG="$NNN_PLUG_DEFAULT"
+
