@@ -1,6 +1,6 @@
 # Command overwrites and shortcuts
 alias rmr "rm -rf"
-alias xsel "xsel --clipboard"
+alias xclip "xclip -selection clipboard"
 alias tree "tree -C"
 
 # ls shortcuts, but with exa because that's cooler
