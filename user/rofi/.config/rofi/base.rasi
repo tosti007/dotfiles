@@ -2,7 +2,7 @@ configuration {
     theme: "base";
     combi-modi: "window,drun,run";
     show-icons: true;
-    font: "Hack 11";
+    font: "InputSans Nerd Font 10";
     terminal: "urxvt";
     run-command: "fish -c '{cmd}'";
     window-thumbnail: true;
