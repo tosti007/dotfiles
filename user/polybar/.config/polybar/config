@@ -22,9 +22,11 @@ wm-restack = i3
 fixed-center = true
 tray-position = none
 
-width = 100%
+; 100% - inner - 2 * outer
+width = 100%:-46
 height = 24
-offset-x = 0
+; width substraction / 2
+offset-x = 23
 offset-y = -8
 
 ;radius = 6.0
