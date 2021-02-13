@@ -1,7 +1,8 @@
 # All things desktop/visuals related
 
-# font
+# font and icons
 ttf-nerd-fonts-input 
+numix-square-icon-theme-git
 
 # audio
 pulseaudio
