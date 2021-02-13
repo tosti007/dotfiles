@@ -3,23 +3,23 @@
 # Quit the script if any command fails
 set -e
 
+shutdown='Shutdown\0icon\x1fkshutdown'
 lock='Lock\0icon\x1fsystem-lock-screen'
-suspend='Suspend\0icon\x1fsystem-suspend'
 reboot='Reboot\0icon\x1fsystem-restart'
-shutdown='Shutdown\0icon\x1fsystem-shutdown'
+hibernate='Hibernate\0icon\x1fsystem-hibernate'
 
 case "$1" in
 '')
 	echo -e "$shutdown"
 	echo -e "$lock"
 	echo -e "$reboot"
-	echo -e "$suspend"
+	echo -e "$hibernate"
 	;;
 Lock)
 	loginctl lock-session
 	;;
 Suspend)
-	systemctl suspend
+	systemctl hibernate
 	;;
 Reboot)
 	reboot
