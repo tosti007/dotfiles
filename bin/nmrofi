@@ -1,0 +1,350 @@
+#!/bin/sh
+
+msg_back='Back'
+
+function _rofi(){
+	rofi -dmenu -p "$@"
+}
+
+function show(){
+	title="$1"
+	info="$2"
+	shift; shift
+	echo -e "$info" | _rofi "$title" "$@"
+}
+
+function cmd(){
+	nmcli --terse "$@"
+}
+
+function loadcmd(){
+	# We can't use the _rofi command here, as that messes up the pid
+	rofi -dmenu -p 'Loading' -mesg 'Loading data' > /dev/null 2>&1 &
+	rpid="$!"
+	cmd "$@"
+	status="$?"
+	kill "$rpid"
+	return "$status"
+}
+
+function screen_main(){
+	msg_edit="Edit a connection"
+	msg_activate="Activate a wifi connection"
+	msg_enable="Enable/Disable a device"
+	msg_more="More"
+	msg_close="Close"
+	msgs="$msg_edit\n$msg_activate\n$msg_enable\n$msg_more\n$msg_close"
+
+	action=`show 'nmrofi' "$msgs"`
+	case "$action" in
+		'' | "$msg_close")
+			exit 0
+			;;
+		"$msg_edit")
+			screen_edit
+			;;
+		"$msg_activate")
+			screen_activate
+			;;
+		"$msg_enable")
+			screen_enable
+			;;
+		"$msg_more")
+			screen_more
+			;;
+		*)
+			echo "Unknown option \"$action\"."
+			exit 1
+			;;
+	esac
+}
+
+function screen_edit_selected(){
+	# @1, connection name
+
+	read -r connectiontype connected <<< `\
+		cmd --fields connection.type,general.state \
+		connection show "$1" | \
+		sed 's/^.*://' | \
+		tr "\n" ' '`
+	connectiontype=`sed 's/^.*-//' <<< "$connectiontype"`
+	if [ "$connected" == "activated" ]; then
+		connected='yes'
+	else
+		connected='no'
+	fi
+
+	msg_up='Enable connection'
+	msg_down='Disable connection'
+	msg_change_nickname='Change nickname'
+	msg_forget='Forget connection'
+
+	msgs=''
+	if [ "$connected" == 'yes' ]; then
+		msgs="$msg_down"
+	else
+		msgs="$msg_up"
+	fi
+	msgs="$msgs\n$msg_change_nickname"
+	if [ "$connectiontype" != 'ethernet' ]; then
+		msgs="$msgs\n$msg_forget"
+	fi
+	msgs="$msgs\n$msg_back"
+
+	#TODO: Should this be changed into a do-while? Then we do not need to go in recursion for msg_back on msg_change_nickname.
+	action=`show 'Edit' "$msgs" -mesg "Connection: $1"`
+	case "$action" in
+		'')
+			exit 0
+			;;
+		"$msg_back")
+			screen_edit
+			;;
+		"$msg_up")
+			echo "Setting connection \"$1\" to up"
+			cmd connection up "$1" > /dev/null 2>&1
+			if [ "$?" != '0' ]; then
+				>&2 echo 'Could not connect'
+				exit 1
+			fi
+			;;
+		"$msg_down")
+			echo "Setting connection \"$1\" to down"
+			cmd connection down "$1" > /dev/null 2>&1
+			;;
+		"$msg_change_nickname")
+			new_nickname=`show 'New nickname' "$msg_back"`
+			if [ -n "$new_nickname" ]; then
+				if [ "$new_nickname" == "$msg_back" ]; then
+					screen_edit_selected "$1"
+				else
+					echo "Changing nickname for \"$1\" to \"$new_nickname\""
+					cmd connection modify "$1" connection.id "$new_nickname"
+				fi
+			fi
+			;;
+		"$msg_forget")
+			cmd connection delete "$1"
+			;;
+		*)
+			echo "Unknown option \"$action\"."
+			exit 1
+			;;
+	esac
+}
+
+function screen_edit(){
+	msg_active=' (Currently active)'
+	msgs=`cmd --fields name,type,active connection show | sed -E "
+		# Strip the numbers of the type field
+		s/:.*-(.*):/ (\u\1):/
+		/:no$/ {
+		        # The connection is not active, print just the name
+			s/:no$//
+			p; d
+		}
+	        /:yes$/ {
+			# The connection is active, print some nicer output
+			s/:yes$/$msg_active/
+			p; d
+		}
+		# There should be a yes or no, lets ignore this line if there is none.
+		d
+	"`
+
+	if [ -z "$msgs" ]; then
+		action=`show 'Edit' "$msg_back" -mesg "No connections found"`
+	else
+		action=`show 'Edit' "$msgs\n$msg_back"`
+	fi
+	
+	case "$action" in
+		'')
+			exit 0
+			;;
+		"$msg_back")
+			screen_main
+			;;
+		*)
+			action="${action%$msg_active}"
+			action=`sed 's/ (.*)$//' <<< "$action"`
+			screen_edit_selected "$action"
+			;;
+	esac
+}
+
+function screen_activate_selected(){
+	# @1, connection ssid
+	# @2, mesg (if any)
+
+	if [ -z "$2" ]; then
+		action=`show 'Password' "$msg_back" -password`
+	else
+		action=`show 'Password' "$msg_back" -password -mesg "$2"`
+	fi
+
+	if [ -n "$action" ]; then
+		if [ "$action" == "$msg_back" ]; then
+			screen_activate
+		else
+			echo "Connecting to \"$1\""
+			result=`loadcmd device wifi connect "$1" password "$action" 2> /dev/stdin | sed '
+			s/^.*successfully activated.*$/success/
+			s/^.*Secrets were required, but not provided.$/password/
+			s/^.*property is invalid.$/password/
+			'`
+			case "$result" in
+				'success')
+					echo 'Successfully connected'
+					;;
+				'password')
+					echo 'Connecting failed'
+					cmd connection delete "$1" > /dev/null
+					screen_activate_selected "$1" "Wrong password"
+					;;
+				*)
+					#TODO: For some reason, this does not always print the "Unknown response" prefix
+					echo "Unkown response \"$result\""
+					echo 'Removing connection'
+					cmd connection delete "$1" > /dev/null
+					;;
+			esac
+		fi
+	fi
+}
+
+function screen_activate(){
+	msgs=`loadcmd --fields ssid,rate,bars device wifi list --rescan yes | \
+		sed -E 's/^(.*):(.*):(.*)$/\1 \(\2\) \3/'`
+
+	msgs="$msg_back\n$msgs"
+
+	action=`show 'Activate' "$msgs"`
+	#TODO: Should this be changed to a do-while? That way we do not need to update the list in case we go back from a selected connection.
+	case "$action" in
+		'')
+			exit 0
+			;;
+		"$msg_back")
+			screen_main
+			;;
+		*)
+			action="${action% (*}"
+			screen_activate_selected "$action"
+			;;
+	esac
+}
+
+function screen_enable(){
+	msg_enable='Enable'
+	msg_disable='Disable'
+
+	function get_action(){
+		if [ `cmd $@` == 'enabled' ]; then
+			echo "$msg_disable"
+		else
+			echo "$msg_enable"
+		fi
+	}
+	function toggle_command(){
+		if [ "$1" == "$msg_enable" ]; then
+			echo 'on'
+		else
+			echo 'off'
+		fi
+	}
+	
+	msg_all='all networking'
+	msg_wifi='wifi'
+	msg_wwan='wwan'
+	text_all="$(get_action networking) $msg_all"
+	text_wifi="$(get_action radio wifi) $msg_wifi"
+	text_wwan="$(get_action radio wwan) $msg_wwan"
+	msgs="$text_all\n$text_wifi\n$text_wwan\n$msg_back"
+
+	# We read the whole msg and split it after the first space
+	action=`show 'Enable/Disable a device' "$msgs"`
+	IFS=' ' read -r toggle action <<< "$action"
+
+	# If we selected something without enable/disable prefix, then action is empty
+	# thus we need to place toggle into action (e.g. for msg_back)
+	action="${action:-$toggle}"
+
+	# We need to change msg_enable and msg_disable into on and off respectively
+	if [ "$toggle" == "$msg_enable" ]; then
+		toggle='on'
+	else
+		toggle='off'
+	fi
+
+	case "$action" in
+		'')
+			exit 0
+			;;
+		"$msg_back")
+			screen_main
+			;;
+		"$msg_all")
+			echo "Setting networking to $toggle"
+			cmd networking $toggle
+			;;
+		"$msg_wifi")
+			echo "Setting radio wifi to $toggle"
+			cmd radio wifi $toggle
+			;;
+		"$msg_wwan")
+			echo "Setting radio wwan to $toggle"
+			cmd radio wwan $toggle
+			;;
+		*)
+			echo "Unknown option \"$action\"."
+			exit 1
+			;;
+	esac
+}
+
+function screen_more(){
+	msg_hostname='Change hostname'
+	msg_opentui='Launch nmtui'
+	msgs="$msg_hostname\n$msg_opentui\n$msg_back"
+
+	action=`show 'More' "$msgs"`
+	case "$action" in
+		'')
+			exit 0
+			;;
+		"$msg_back")
+			screen_main
+			;;
+		"$msg_hostname")
+			cur_hostname=`cmd general hostname`
+			new_hostname=`show 'New hostname' "$msg_back" -mesg "Current hostname: $cur_hostname"`
+			if [ -n "$new_hostname" ]; then
+				if [ "$new_hostname" == "$msg_back" ]; then
+					screen_more
+				else
+					echo "Changing hostname to \"$new_hostname\""
+					cmd general hostname "$new_hostname"
+				fi
+			fi
+			;;
+		"$msg_opentui")
+			$TERMINAL -e nmtui &
+			;;
+		*)
+			echo "Unknown option \"$action\"."
+			exit 1
+			;;
+	esac
+}
+
+screen_main
+
+# Pages:
+# Edit a connection
+# Activate a connection
+# Enable/Disable a device
+# More
+#   - Set hostname
+#   - Open nmtui
+# Quit
