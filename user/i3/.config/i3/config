@@ -38,12 +38,11 @@ exec --no-startup-id ~/.config/xss-lock/lock.sh
 # Launch auto-startup programs
 exec bitwarden-desktop
 
+# for_window rules
 for_window [class="URxvt" title="^spotify$"] $move_scratchpad
 for_window [class="Signal"] $move_scratchpad
 for_window [class="Bitwarden"] $move_scratchpad
 for_window [class="feh"] floating enable
-
-#focus_on_window_activation [class="Signal"] none
 
 #######################################
 # Hotkey settings
@@ -100,6 +99,10 @@ bindsym $mod+a scratchpad show
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
+# launch utilities
+bindsym $mod+p exec bwrofi
+bindsym $mod+n exec nmrofi
 
 #######################################
 # Hotkeys with bound modes
