@@ -101,7 +101,7 @@ bindsym $mod+a scratchpad show
 bindsym $mod+Shift+r restart
 
 # launch utilities
-bindsym $mod+p exec bwrofi
+bindsym --release $mod+p exec bwrofi
 bindsym $mod+n exec nmrofi
 
 #######################################
