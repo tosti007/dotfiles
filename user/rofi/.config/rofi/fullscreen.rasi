@@ -1,9 +1,9 @@
 configuration {         
     theme: "fullscreen";         
-    modi: "drun,combi,run";
+    modi: "drun,combi,calc";
     display-drun: "Apps";
     display-combi: "General";
-    display-run: "Command";
+    display-calc: "Calculator";
 }
 
 @import "base.rasi"

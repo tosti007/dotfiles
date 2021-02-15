@@ -38,6 +38,7 @@ dragon-drag-and-drop
 # rofi/dmenu
 rofi
 rofi-dmenu
+rofi-calc
 
 # other
 polybar
