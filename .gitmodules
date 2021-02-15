@@ -1,3 +1,9 @@
 [submodule "firefox/startpage"]
 	path = user/firefox/.mozilla/firefox/startpage
 	url = git@github.com:tosti007/startpage.git
+[submodule "cache/rofi-rbw"]
+	path = cache/rofi-rbw
+	url = git@github.com:fdw/rofi-rbw.git
+[submodule "assets/rofi-rbw"]
+	path = assets/rofi-rbw
+	url = git@github.com:fdw/rofi-rbw.git
