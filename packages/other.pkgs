@@ -1,6 +1,5 @@
 # Packages that do not fit in any config pkg list
 # However still listed as they are often used.
-keepassxc
 libreoffice-still
 firefox
 discord
@@ -11,4 +10,7 @@ zathura-pdf-mupdf
 
 # Password manager
 rbw
+
+# Utilities
+md2pdf
 
