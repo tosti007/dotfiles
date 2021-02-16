@@ -41,7 +41,7 @@ rofi-dmenu
 rofi-calc
 
 # other
-polybar
+polybar-git
 picom-git
 xclip
 xorg-xbacklight

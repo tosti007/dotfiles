@@ -91,13 +91,13 @@ label-empty = ""
 
 [module/network-wired]
 type = internal/network
-interface = enp4s0
+interface-type = wired
 label-connected = ""
 label-connected-alignment = right
 
 [module/network-wireless]
 type = internal/network
-interface = wlp5s0
+interface-type = wireless
 label-connected= "直%signal%%"
 
 [module/volume]
@@ -116,13 +116,15 @@ type = internal/battery
 battery = BAT0
 adapter = AC0
 
+full-at = 100
 low-at = 15
-format-low-background = ${colors.alert}
 
 label-full = "%percentage%%"
 label-charging = "%percentage%%"
 label-low = "%percentage%%"
 label-discharging = "%percentage%%"
+
+format-low-background = ${colors.alert}
 
 [module/time]
 type = internal/date
