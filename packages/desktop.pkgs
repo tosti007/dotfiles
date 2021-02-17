@@ -5,8 +5,9 @@ ttf-nerd-fonts-input
 numix-square-icon-theme-git
 
 # audio
-pulseaudio
-pulseaudio-alsa
+pipewire
+pipewire-alsa
+pipewire-pulse
 pavucontrol
 
 # theming
