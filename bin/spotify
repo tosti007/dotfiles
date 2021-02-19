@@ -10,51 +10,23 @@ Commands:
   [none]	Start the spotifyd process and spotify-tui screen
   play		Play music
   pause		Pause music
-  playpause	Toggle music
+  play-pause	Toggle music
   next		Play the next track
   previous	Play the previous track
+  status	Displays the current playing status
   current 	Displays the current track and artist
 
 Options:
   -h, --help	Show this output
 "
 
-function controll {
-	systemctl --user $1 spotifyd.service
+function controll-start {
+	systemctl --user start spotifyd.service
 }
 
-function send {
-	dbus-send --print-reply \
-		--dest="org.mpris.MediaPlayer2.spotifyd" \
-		/org/mpris/MediaPlayer2 \
-		"org.mpris.MediaPlayer2.Player.${1^}" \
-		> /dev/null
-}
-
-function get-song-data(){
-        songdata=`dbus-send --print-reply \
-        --dest="org.mpris.MediaPlayer2.spotifyd" \
-        /org/mpris/MediaPlayer2 \
-        org.freedesktop.DBus.Properties.Get \
-        string:org.mpris.MediaPlayer2.Player \
-        string:Metadata \
-        2> /dev/null | \
-        sed -En 's/^.*(int32|int64|double|string) (.*)/\2/p' | \
-        tr -d '"' | \
-        sed 's/^mpris/xesam/' | \
-        sed ':start N
-                /^xesam.*xesam/ !{
-                        s/\n/, /
-                        b start
-                }
-                P; D' | \
-        sed -E 's/^xesam:([^,]*), /\1:/' | \
-	sed -E 's/ ?\(.*\)//'`
-}
-
-
-function search-song-data(){
-        sed -En "/$1:/ { s/$1://; p }" <<< "$songdata"
+function controll-stop {
+	~/.config/polybar/spotify.sh close
+	systemctl --user stop spotifyd.service
 }
 
 case $1 in
@@ -64,23 +36,15 @@ case $1 in
 	;;
 '')
 	trap 'exit 0' INT TERM
-	trap 'controll stop; PLAYER_EVENT='stop' ~/.config/spotifyd/hooks.sh' EXIT
-	controll start
+	trap 'controll-stop' EXIT
+	controll-start
 	spt
 	;;
 current)
-        while [ -z "$songdata" ]; do
-                get-song-data
-        done
-        title=`search-song-data 'title'`
-        artist=`search-song-data 'artist'`
-        echo "$title — $artist"
+	playerctl metadata --format "{{xesam:title}} — {{xesam:artist}}" 2> /dev/null
 	;;
-play | pause | next | previous)
-	send $1
-	;;
-playpause)
-	send PlayPause
+play | pause | play-pause | next | previous | status)
+	playerctl $1
 	;;
 *)
 	echo "No such command"

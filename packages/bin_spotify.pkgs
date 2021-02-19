@@ -2,3 +2,4 @@
 # also uses: dbus-send
 spotify-tui-bin
 spotifyd
+playerctl
