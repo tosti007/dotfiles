@@ -1,23 +1,14 @@
 #!/bin/bash
 # Copied and modified from /usr/share/doc/xss-lock/transfer-sleep-lock-generic-delay.sh
 
-# Run before starting the locker
-pre_lock() {
-	#spotify pause?
-	return
-}
+cd "$(dirname "$0")"
 
 # Do the actual locking
 run_lock() {
 	i3lock-script --nofork $@
 }
 
-# Run after the locker exits
-post_lock() {
-	return
-}
-
-pre_lock
+./lock-pre.sh
 
 # kill locker if we get killed
 trap 'kill %%' TERM INT
@@ -34,5 +25,5 @@ fi
 
 wait # for locker to exit
 
-post_lock
+./lock-post.sh
 
