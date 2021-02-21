@@ -23,8 +23,8 @@ window {
 }
 
 mainbox {
-    border: 16;
-    padding: 23px; // inner / 2 + outer
+    border: 8;
+    padding: 16px; // inner / 2 + outer
     background-color: @background;
     children: [mode-switcher,inputbar,message,listview];
 }
@@ -71,18 +71,18 @@ textbox {
 
 listview {
     layout: vertical;
-    padding: 15px; // inner / 2
-    spacing: 15px; // inner / 2
+    padding: 8px; // inner / 2
+    spacing: 8px; // inner / 2
     cycle: false;
     lines: 8;
 }
 
 element {
-    padding: 15px; // inner / 2
+    padding: 8px; // inner / 2
 }
 
 element-icon {
-    margin: 0 15px 0 0; // inner / 2
+    margin: 0 8px 0 0; // inner / 2
     size: 18px;
 }
 

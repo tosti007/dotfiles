@@ -8,7 +8,7 @@ configuration {
 
 window {
     //(mainbox.border + mainbox.padding) * 2 + list.spacing * 3 + ((elem.pad + elem.marg) * 2 + icon.size) * lines + word spacing fix
-    width: calc((16px + 23px           ) * 2 + 15px         * 3 + ((15px     + 0px      ) * 2 + 72px     ) * 4 + 12px);
+    width: calc((8px  + 16px           ) * 2 + 8px          * 3 + ((8px      + 0px      ) * 2 + 72px     ) * 4 + 1px);
 }
 
 mainbox {
@@ -17,6 +17,7 @@ mainbox {
 
 listview {
     lines: 4;
+    columns: 1;
     padding: 0px;
     margin: 0px;
     layout: horizontal;

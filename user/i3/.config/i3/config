@@ -14,9 +14,9 @@ set $move_scratchpad move scratchpad, scratchpad show
 floating_modifier $mod
 
 # borders and gaps
-default_border pixel 16
+default_border pixel 8
 gaps outer 8
-gaps inner 30
+gaps inner 16
 gaps top 32 # outer + polybar = 8 + 24
 
 #######################################

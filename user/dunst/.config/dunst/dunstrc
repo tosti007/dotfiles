@@ -31,7 +31,7 @@
     # screen width minus the width defined in within the geometry option.
 
     # locations are: +(inner+outer gaps)/2 and (polybarheight+halfgaps)
-    geometry = "400x8-19+47"
+    geometry = "400x8-12+40"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
