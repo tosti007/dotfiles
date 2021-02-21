@@ -10,6 +10,7 @@ user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
 user_pref("browser.search.widget.inNavBar", false);
 user_pref("browser.contentblocking.category", "strict");
 user_pref("signon.rememberSignons", false);
+user_pref("extensions.pocket.enabled", false);
 
 // Required for chrome
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);

@@ -1,16 +1,13 @@
 /* 
-  ____  _                 _                     _   
- / ___|(_)_ __ ___  _ __ | | ___ _ __ ___ _ __ | |_ 
- \___ \| | '_ ` _ \| '_ \| |/ _ \ '__/ _ \ '_ \| __|
-  ___) | | | | | | | |_) | |  __/ | |  __/ | | | |_ 
- |____/|_|_| |_| |_| .__/|_|\___|_|  \___|_| |_|\__|
- |  ___|____  __   |_|                              
- | |_ / _ \ \/ /                                    
- |  _| (_) >  <                                     
- |_|  \___/_/\_\                             
-
-With URL Bar Version
-
+  ___ _            _                 _   
+ / __(_)_ __  _ __| |___ _ _ ___ _ _| |_ 
+ \__ \ | '  \| '_ \ / -_) '_/ -_) ' \  _|
+ |___/_|_|_|_| .__/_\___|_| \___|_||_\__|
+ | __|____ __|_|                         
+ | _/ _ \ \ /                            
+ |_|\___/_\_\                            
+                                         
+ With URL Bar Version
 
 */
 
@@ -22,10 +19,21 @@ Here you can change the opacity level and the main color of the browser. Also th
 
 */
 
+@import "../../../../.cache/wal/colors.css";
+
 :root {
-    --srf-color-primary: rgba(20, 20, 20, 0.6);
-    --srf-color-selection: #66A6D9;
-    --srf-color-urlbar: rgba(20, 20, 20, 0.8);
+    --srf-color-primary: var(--background);
+    --srf-color-selection: var(--color12);
+    --srf-color-urlbar: var(--color0);
+}
+
+/*
+C U S T O M
+*/
+
+#reader-mode-button,
+#readinglist-addremove-button {
+ display:none !important;
 }
 
 /* 
@@ -223,7 +231,7 @@ U R L - B A R
 
 #urlbar-background {
     background: var(--srf-color-urlbar) !important;
-    border: none !important;
+    border: var(--srf-color-urlbar) !important;
     animation: none !important;
 }
 
@@ -255,6 +263,10 @@ U R L - B A R
 
 .urlbarView-row-inner {
     padding-inline-start: 4px !important;
+}
+
+#urlbar-label-box, #urlbar-search-mode-indicator {
+    display: none !important;
 }
 
 /* 
