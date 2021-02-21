@@ -1,12 +1,12 @@
 # Command overwrites and shortcuts
 alias rmr "rm -rf"
 alias xclip "xclip -selection clipboard"
-alias tree "tree -C"
 
 # ls shortcuts, but with exa because that's cooler
-alias ls "exa --group-directories-first -G"
-alias ll "ls -l --git"
+alias ls "exa --group-directories-first"
+alias ll "ls -l"
 alias la "ll -a"
+alias tree "ls --tree"
 
 # cat shortcuts, but with bat
 alias cat "bat"
