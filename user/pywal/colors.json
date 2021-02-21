@@ -2,13 +2,13 @@
     "wallpaper": "$HOME/.dotfiles/assets/background/background.jpg",
     "alpha": "90",
     "special": {
-        "background": "#191919",
+        "background": "#141414",
         "foreground": "#eeeeee",
         "cursor": "#eeeeee"
     },
     "colors": {
-        "color0": "#141414",
-        "color8": "#1e1e1e",
+        "color0": "#000000",
+        "color8": "#000000",
         
         "color1": "#ff5252",
         "color9": "#ff5252",
