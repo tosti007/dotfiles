@@ -1,8 +1,9 @@
 # All things desktop/visuals related
 
-# font and icons
+# font, icons, and cursor
 ttf-nerd-fonts-input 
 numix-square-icon-theme-git
+quintom-cursor-theme-git
 
 # audio
 pipewire
