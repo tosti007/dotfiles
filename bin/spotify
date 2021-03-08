@@ -20,13 +20,18 @@ Options:
   -h, --help	Show this output
 "
 
+function controll {
+	playerctl --player=spotifyd "$@"
+}
+
 function controll-start {
-	systemctl --user start spotifyd.service
+	spotifyd --no-daemon >/dev/null 2>&1 &
+	spotifyd_pid="$!"
 }
 
 function controll-stop {
 	~/.config/polybar/spotify.sh close
-	systemctl --user stop spotifyd.service
+	kill $spotifyd_pid
 }
 
 case $1 in
@@ -41,10 +46,10 @@ case $1 in
 	spt
 	;;
 current)
-	playerctl metadata --format "{{xesam:title}} — {{xesam:artist}}" 2> /dev/null
+	controll metadata --format "{{xesam:title}} — {{xesam:artist}}" 2> /dev/null
 	;;
 play | pause | play-pause | next | previous | status)
-	playerctl $1
+	controll $1
 	;;
 *)
 	echo "No such command"
