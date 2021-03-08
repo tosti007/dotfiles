@@ -35,9 +35,6 @@ exec_always --no-startup-id ~/.config/i3wsr/launch.sh
 exec --no-startup-id ~/.config/xss-lock/launch.sh
 exec --no-startup-id ~/.config/xss-lock/lock.sh
 
-# Launch auto-startup programs
-exec bitwarden-desktop
-
 # for_window rules
 for_window [class="URxvt" title="^spotify$"] $move_scratchpad
 for_window [class="Signal"] $move_scratchpad
