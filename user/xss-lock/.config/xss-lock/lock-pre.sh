@@ -3,9 +3,9 @@
 
 dunstctl set-paused true
 
-if [[ `playerctl status` == 'Playing' ]]; then
-	playerctl pause
-	touch /tmp/xss-lock_playerctl_resume
+if [[ `spotify status` == 'Playing' ]]; then
+	spotify pause
+	touch /tmp/xss-lock_spotify_resume
 fi
 
 rbw lock
